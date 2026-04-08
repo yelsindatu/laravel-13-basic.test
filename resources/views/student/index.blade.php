@@ -1,6 +1,10 @@
  <x-app>
 
      <x-slot:title>{{ $title }}</x-slot>
+     <ul class="list-group">
+         @foreach ($students as $student)
+             <li class="list-group-item">{{ $student->nim }}{{ $student->name }}</li>
+         @endforeach
 
-     <h1 class="fw-bold">Form Create Student</h1>
+     </ul>
  </x-app>
