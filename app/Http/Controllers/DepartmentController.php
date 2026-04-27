@@ -12,10 +12,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return view('department.index', 
-        ['title' => 'Department',
-        'departments'=> Department::latest()->get(),
-        
+        return view('department.index', [
+            'title' => 'Department',
+            'departments' => Department::latest()->get(),
         ]);
     }
 
@@ -24,7 +23,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        // belum digunakan
     }
 
     /**
@@ -32,7 +31,7 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // belum digunakan
     }
 
     /**
@@ -40,7 +39,10 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        return view('department.show', [
+            'title' => 'Detail Department',
+            'department' => $department,
+        ]);
     }
 
     /**
@@ -48,7 +50,7 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        // belum digunakan
     }
 
     /**
@@ -56,7 +58,7 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        // belum digunakan
     }
 
     /**
@@ -64,6 +66,6 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        // belum digunakan
     }
 }
