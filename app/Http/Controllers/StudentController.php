@@ -44,7 +44,9 @@ class StudentController extends Controller
         'nim.numeric'=>'NIM wajib angka',
     ]);
         Student::create($validated);
-return to_route('student.index')->withSuccess('Data berhasil ditambahkan');
+    return to_route('student.index')->withSuccess('Data berhasil ditambahkan');
+
+    
 
 
     }
