@@ -1,36 +1,29 @@
 <x-app>
+
     <x-slot:title>{{ $title }}</x-slot>
 
-    {{-- Alert Success --}}
-    @if (session('success'))
+    @session('success')
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
-    @endif
+    @endsession
 
-    {{-- Button Create --}}
-    <a class="btn btn-primary mb-3" href="{{ route('lecturer.create') }}">
-        Create
-    </a>
+    <a class="btn btn-primary mb-3" href="{{ route('lecturer.create') }}" role="button">Create</a>
 
-    {{-- Form Search --}}
-    <form action="" method="GET">
-        <div class="row g-2 mb-3 align-items-end">
+    <form action="">
 
-            {{-- Input Search --}}
+        <div class="row g-3 mb-3">
             <div class="col-md-4">
-                <input type="text" class="form-control" name="keyword" placeholder="Search lecturer name ..."
-                    value="{{ request('keyword') }}">
+                <input type="text" class="form-control" id="keyword" name="keyword"
+                    placeholder="Search lecturer name ..." value="{{ request('keyword') }}">
             </div>
 
-            {{-- Select Department --}}
             <div class="col-md-4">
-                <select class="form-select" name="department_id">
+                <select class="form-select" id="department_id" name="department_id">
                     <option value="">All Department</option>
                     @foreach ($departments as $department)
                         <option value="{{ $department->id }}"
                             {{ request('department_id') == $department->id ? 'selected' : '' }}>
-
                             {{ $department->name }}
 
                         </option>
@@ -38,41 +31,34 @@
                 </select>
             </div>
 
-            {{-- Button --}}
             <div class="col-md-4">
-                <button type="submit" class="btn btn-success w-100">
-                    Search
-                </button>
+                <button type="submit" class="btn btn-success">Search</button>
             </div>
 
         </div>
-    </form>
 
-    {{-- List Data --}}
+    </form>
     <ul class="list-group">
         @foreach ($lecturers as $lecturer)
             <li class="list-group-item">
-                {{ $lecturers->firstItem() + $loop->index }}.
-                {{ $lecturer->name }} -- {{ $lecturer->department->name }}
+                {{ $lecturers->firstItem() + $loop->index }}. {{ $lecturer->name }} --
+                {{ $lecturer->department->name }}
 
-                {{-- Tombol dekat teks --}}
-                <a href="{{ route('lecturer.edit', $lecturer) }}" class="btn btn-warning btn-sm ms-2">
-                    Edit
-                </a>
+                <a class="btn btn-info btn-sm" href="{{ route('lecturer.show', $lecturer) }}" role="button">detail</a>
+                <a class="btn btn-warning btn-sm" href="{{ route('lecturer.edit', $lecturer) }}"
+                    role="button">Edit</a>
 
                 <form action="{{ route('lecturer.destroy', $lecturer) }}" method="POST" class="d-inline">
-                    @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm ms-1" onclick="return confirm('Anda yakin?')">
-                        Delete
-                    </button>
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Anda yakin?')">Delete</button>
                 </form>
+
             </li>
         @endforeach
     </ul>
 
-    {{-- Pagination --}}
-    <div class="mt-3">
-        {{ $lecturers->links() }}
-    </div>
+    {{ $lecturers->links() }}
+
 </x-app>
